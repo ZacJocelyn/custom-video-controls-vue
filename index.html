@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="http://vjs.zencdn.net/5.19.2/video-js.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://w3cj.github.io/materialize-themes/dist/css/materialize-blue-grey-red.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+
+    <div id="app">
+      <div v-show=show class="">
+        <video
+          id="vid1"
+          class="video-js vjs-default-skin"
+          controls="false"
+          autoplay
+          width="640" height="264"
+          data-setup='{ "techOrder": ["html5", "flash", "youtube"], "sources": [] }'
+        >
+        </video>
+        <div class="control-bar-div">
+          <control-bar></control-bar>
+        </div>
+      </div>
+    </div>
+    <template id="control-bar">
+      <div id='media-controls'>
+        <button class="btn-floating btn-small waves-effect waves-light"
+          @click='togglePlayPause()' v-model="playing">
+          <i class="material-icons">{{ playing }}</i>
+        </button>
+        <button class="btn-floating btn-small waves-effect waves-light"
+          @click='toggleMute()' v-model="muted">
+          <i class="material-icons">{{ muted }}</i>
+        </button>
+        <span>{{ elapsedTime }}</span>
+        <progress id='progress-bar' min='0' max='100'@click='videoScrubbing' v-model='percentage'>{{ percentage }}% played</progress>
+        <span id="display-time">{{ totalTime }}</span>
+        <div>
+          <ul class="collection">
+            <li class="collection-item">{{ ready }}</li>
+            <li class="collection-item">{{ playPauseState }}</li>
+            <li class="collection-item">{{ seeked }}</li>
+            <li class="collection-item">{{ source }}</li>
+            <li class="collection-item">{{ ended }}</li>
+            <li class="collection-item">{{ timeChange }}</li>
+            <li class="collection-item">{{ vidDuration }}</li>
+          </ul>
+        </div>
+      </div>
+    </template>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js" charset="utf-8"></script>
+    <script src="http://vjs.zencdn.net/5.19.2/video.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-youtube/2.4.0/Youtube.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.5.3/videojs-contrib-hls.min.js"></script>
+    <script src="app.js" charset="utf-8"></script>
+  </body>
+</html>

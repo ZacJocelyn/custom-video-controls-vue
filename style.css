@@ -1,0 +1,11 @@
+/*.vjs-default-skin.vjs-has-started .vjs-control-bar {
+visibility: hidden;
+}*/
+.control-bar-div {
+  width: 640px;
+  background-color: #78909C;
+  height: 6vh;
+}
+#progress-bar {
+  width: 450px;
+}

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "get-video-duration": "^0.2.0",
+    "video.js": "^5.12.6",
+    "videojs": "^1.0.0",
+    "videojs-contrib-hls": "^5.5.3",
+    "videojs-youtube": "^2.2.0"
+  }
+}
