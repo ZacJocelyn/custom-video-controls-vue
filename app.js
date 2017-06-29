@@ -163,27 +163,23 @@ Vue.component('control-bar' , {
           return videos;
         }else {
           myPlayer.src(videos[i])
-          if (videos[i].type === 'video/youtube') {
             myPlayer.on('waiting', function() {
               if (videoDurations.length === videos.length) {
                 return videos;
               }else {
+                if (myPlayer.duration() == 0) {
+                  myPlayer.src(videos[i])
+                  setTimeout(function() {
+                    videoDurations[i] = myPlayer.duration();
+                    i++
+                    return getVideoDuration(i, videos);
+                  }, 2000)
+                }
                 videoDurations[i] = myPlayer.duration();
                 i++
                 return getVideoDuration(i, videos);
               }
             })
-          }else {
-            myPlayer.on('loadedmetadata', function() {
-              if (videoDurations.length === videos.length) {
-                return videos;
-              }else {
-                videoDurations[i] = myPlayer.duration();
-                i++
-                return getVideoDuration(i, videos);
-              }
-            })
-          }
         }
       }
       myPlayer.on('ended', function() {
