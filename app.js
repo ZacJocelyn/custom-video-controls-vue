@@ -39,7 +39,6 @@ Vue.component('control-bar' , {
         data.currentVid2 = data.currentVid
       }
       var currentTime = this.currentTime() + data.preVids
-      console.log(currentTime);
       var percentage = Math.floor((100 / data.time) *
       currentTime);
       data.percentage = percentage;
@@ -164,15 +163,27 @@ Vue.component('control-bar' , {
           return videos;
         }else {
           myPlayer.src(videos[i])
-          myPlayer.on('waiting', function() {
-            if (videoDurations.length === videos.length) {
-              return videos;
-            }else {
-              videoDurations[i] = myPlayer.duration();
-              i++
-              return getVideoDuration(i, videos);
-            }
-          })
+          if (videos[i].type === 'video/youtube') {
+            myPlayer.on('waiting', function() {
+              if (videoDurations.length === videos.length) {
+                return videos;
+              }else {
+                videoDurations[i] = myPlayer.duration();
+                i++
+                return getVideoDuration(i, videos);
+              }
+            })
+          }else {
+            myPlayer.on('loadedmetadata', function() {
+              if (videoDurations.length === videos.length) {
+                return videos;
+              }else {
+                videoDurations[i] = myPlayer.duration();
+                i++
+                return getVideoDuration(i, videos);
+              }
+            })
+          }
         }
       }
       myPlayer.on('ended', function() {
