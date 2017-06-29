@@ -39,6 +39,7 @@ Vue.component('control-bar' , {
         data.currentVid2 = data.currentVid
       }
       var currentTime = this.currentTime() + data.preVids
+      console.log(currentTime);
       var percentage = Math.floor((100 / data.time) *
       currentTime);
       data.percentage = percentage;
